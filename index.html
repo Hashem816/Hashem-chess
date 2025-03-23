@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="منصة شطرنج ذكية مع خصم ذكاء اصطناعي متطور - تحدٍ استراتيجي حقيقي!">
+    <meta name="keywords" content="شطرنج، ذكاء اصطناعي، لعبة استراتيجية، ألغوريثمات">
+    <meta property="og:title" content="الشطرنج الذكي | منافسة الذكاء الاصطناعي المتقدم">
+    <meta property="og:image" content="/og-image.jpg">
+    
+    <!-- تحميل الخطوط بشكل غير متزامن -->
+    <link rel="preload" href="fonts/NotoNaskhArabic-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="style.css" media="print" onload="this.media='all'">
+    
+    <!-- نظام إدارة الحالة -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "GameApplication",
+        "name": "الشطرنج الذكي",
+        "applicationCategory": "StrategyGame",
+        "operatingSystem": "Web"
+    }
+    </script>
+    
+    <title>الشطرنج الذكي | تحدٍ استراتيجي ضد الذكاء الاصطناعي</title>
+</head>
+<body>
+    <div class="chess-app-container">
+        <!-- رأس التطبيق المعزز -->
+        <header class="app-header" role="banner">
+            <nav class="main-nav" aria-label="القائمة الرئيسية">
+                <div class="brand-logo" itemscope itemtype="https://schema.org/Organization">
+                    <span class="chess-icon" aria-hidden="true">♜</span>
+                    <h1 class="site-title" itemprop="name">الشطرنج الاستراتيجي</h1>
+                </div>
+                
+                <!-- قائمة إضافية للوظائف المتقدمة -->
+                <ul class="nav-links">
+                    <li><a href="#settings" role="button" aria-label="الإعدادات المتقدمة"><span class="nav-icon">⚙️</span>الإعدادات</a></li>
+                    <li><a href="#stats" role="button" aria-label="تحليل الإحصائيات"><span class="nav-icon">📊</span>الإحصائيات</a></li>
+                    <li><a href="#multiplayer" role="button" class="premium-feature" aria-label="الوضع الجماعي (مميز)"><span class="nav-icon">👥</span>الجماعي</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- الهيكل الرئيسي للعبة مع تحسينات الوصول -->
+        <main class="game-main" role="main" aria-labelledby="gameTitle">
+            <h2 id="gameTitle" class="sr-only">لوحة الشطرنج الرئيسية</h2>
+            
+            <div class="chess-engine-container">
+                <!-- لوحة الشطرنج مع تحسينات ARIA -->
+                <section class="chess-board-wrapper" aria-label="لوحة الشطرنج">
+                    <div id="chessBoard" class="chess-grid" role="grid" aria-colcount="8" aria-rowcount="8"></div>
+                    <div class="board-overlay" aria-hidden="true"></div>
+                </section>
+
+                <!-- لوحة التحكم المعززة -->
+                <aside class="game-control-panel" role="complementary" aria-labelledby="controlsHeading">
+                    <h3 id="controlsHeading" class="sr-only">أدوات التحكم</h3>
+                    
+                    <div class="control-section game-management">
+                        <button class="control-btn new-game" type="button" aria-label="بدء لعبة جديدة" data-microtip-position="left" role="tooltip">
+                            <span class="btn-icon">🔄</span>
+                            <span class="btn-text">لعبة جديدة</span>
+                            <span class="hotkey-indicator">(Ctrl+N)</span>
+                        </button>
+                        <button class="control-btn undo-move" type="button" aria-label="تراجع عن الحركة الأخيرة" data-microtip-position="left" role="tooltip">
+                            <span class="btn-icon">⏪</span>
+                            <span class="btn-text">تراجع</span>
+                            <span class="hotkey-indicator">(Ctrl+Z)</span>
+                        </button>
+                    </div>
+
+                    <!-- قسم إعدادات متقدم -->
+                    <div class="control-section advanced-settings">
+                        <div class="difficulty-level">
+                            <label for="difficultySelect" class="control-label">مستوى الذكاء:</label>
+                            <select id="difficultySelect" class="difficulty-selector" aria-describedby="difficultyHelp">
+                                <option value="1">مبتدئ (800 ELO)</option>
+                                <option value="2">متوسط (1500 ELO)</option>
+                                <option value="3">متقدم (2000 ELO)</option>
+                                <option value="4">خبير (2400+ ELO)</option>
+                            </select>
+                            <small id="difficultyHelp" class="form-help-text">تؤثر الصعوبة على عمق خوارزمية البحث</small>
+                        </div>
+
+                        <div class="time-control">
+                            <label for="timeControl" class="control-label">التحكم بالوقت:</label>
+                            <input type="range" id="timeControl" min="1" max="60" value="10" class="time-slider">
+                            <output for="timeControl" class="time-output">10 دقيقة</output>
+                        </div>
+                    </div>
+
+                    <!-- معلومات حالة اللعبة -->
+                    <div class="control-section game-status" aria-live="polite">
+                        <div class="status-indicator">
+                            <span class="status-icon">⏳</span>
+                            <span id="gameState" class="status-text">الحالة: جاهز</span>
+                        </div>
+                        <div class="turn-indicator">
+                            <span class="current-turn">دور اللون:</span>
+                            <span id="currentPlayer" class="player-turn">
+                                <span class="color-dot white-dot" aria-hidden="true"></span>
+                                أبيض
+                            </span>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <!-- سجل النقلات المعزز -->
+            <section class="move-history-container" role="region" aria-labelledby="moveHistoryHeading">
+                <div class="history-header">
+                    <h2 id="moveHistoryHeading">سجل النقلات</h2>
+                    <button class="export-btn" aria-label="تصدير السجل كملف PGN"><span>📥</span> تصدير</button>
+                </div>
+                <div class="move-history-list" role="log" aria-live="polite"></div>
+            </section>
+        </main>
+
+        <!-- التذييل المعزز -->
+        <footer class="app-footer" role="contentinfo">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <p class="copyright">&copy; 2024 الشطرنج الذكي. جميع الحقوق محفوظة.</p>
+                    <nav class="footer-nav" aria-label="روابط إضافية">
+                        <a href="/privacy" class="footer-link">الخصوصية</a>
+                        <a href="/terms" class="footer-link">الشروط</a>
+                        <a href="/contact" class="footer-link">الدعم</a>
+                    </nav>
+                </div>
+                
+                <div class="keyboard-shortcuts">
+                    <div class="shortcut-group">
+                        <button class="shortcut-btn" data-action="toggleSound" aria-label="تبديل الصوت">
+                            <span class="sound-icon">🔊</span>
+                        </button>
+                        <span class="shortcut-label">المفتاح: S</span>
+                    </div>
+                    <div class="shortcut-group">
+                        <button class="shortcut-btn" data-action="fullscreen" aria-label="وضع ملء الشاشة">
+                            <span class="fullscreen-icon">⛶</span>
+                        </button>
+                        <span class="shortcut-label">المفتاح: F11</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- نافذة الترقية المعززة -->
+    <dialog id="promotionDialog" class="promotion-modal" aria-labelledby="promotionTitle">
+        <h3 id="promotionTitle" class="promotion-heading">اختر قطعة الترقية</h3>
+        <div class="promotion-options">
+            <button class="promotion-choice" data-piece="♛" aria-label="ترقية إلى ملكة">♛</button>
+            <button class="promotion-choice" data-piece="♜" aria-label="ترقية إلى قلعة">♜</button>
+            <button class="promotion-choice" data-piece="♝" aria-label="ترقية إلى فيل">♝</button>
+            <button class="promotion-choice" data-piece="♞" aria-label="ترقية إلى حصان">♞</button>
+        </div>
+    </dialog>
+
+    <!-- تحميل البرامج النصية بشكل غير متزامن -->
+    <script src="script.js" defer></script>
+    <script src="https://cdn.polyfill.io/v3/polyfill.min.js?features=default,Array.prototype.includes,IntersectionObserver" defer></script>
+</body>
+</html>
